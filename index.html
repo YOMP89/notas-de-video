@@ -1,0 +1,214 @@
+
+                       <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+							<style>
+								body {
+									background-color: white; /* Ensure the iframe has a white background */
+								}
+
+								
+							</style>
+                        </head>
+                        <body>
+                            <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube + Notas</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+        }
+
+        .youtube-section {
+            flex: 1;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-right: 2px solid #e0e0e0;
+        }
+
+        .notes-section {
+            flex: 1;
+            padding: 20px;
+            background-color: #202020;
+            color: white;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .youtube-input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        #loadVideoBtn {
+            padding: 10px 20px;
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        #loadVideoBtn:hover {
+            background-color: #cc0000;
+        }
+
+        .notes-header {
+            margin-bottom: 20px;
+        }
+
+        #noteInput {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #303030;
+            color: white;
+            resize: vertical;
+        }
+
+        #addNoteBtn {
+            padding: 10px 20px;
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #addNoteBtn:hover {
+            background-color: #cc0000;
+        }
+
+        .notes-display {
+            max-height: 70vh;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .note-item {
+            background-color: #303030;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="youtube-section">
+            <input type="text" 
+                   class="youtube-input" 
+                   id="videoUrlInput" 
+                   placeholder="Pega la URL de YouTube aquí">
+            <button id="loadVideoBtn">Cargar Video</button>
+            
+            <div class="video-container" id="videoContainer">
+                <iframe id="youtubeFrame" 
+                        title="YouTube Video" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+        <div class="notes-section">
+            <div class="notes-header">
+                <h2>Notas</h2>
+                <textarea id="noteInput" placeholder="Escribe tu nota aquí..." rows="4"></textarea>
+                <button id="addNoteBtn">Agregar Nota</button>
+            </div>
+            <div class="notes-display" id="notesDisplay"></div>
+        </div>
+    </div>
+
+    <script>
+        // Controlador de carga de video
+        document.getElementById('loadVideoBtn').addEventListener('click', () => {
+            const urlInput = document.getElementById('videoUrlInput').value;
+            const videoId = extractVideoId(urlInput);
+            
+            if (videoId) {
+                const iframe = document.getElementById('youtubeFrame');
+                iframe.src = `https://www.youtube.com/embed/${videoId}`;
+            } else {
+                alert('URL de YouTube no válida');
+            }
+        });
+
+        // Función para extraer el ID del video
+        function extractVideoId(url) {
+            const regex = /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([^&?\/]+)/;
+            const match = url.match(regex);
+            return match ? match[1] : null;
+        }
+
+        // Controlador de notas
+        document.getElementById('addNoteBtn').addEventListener('click', () => {
+            const noteInput = document.getElementById('noteInput');
+            const notesDisplay = document.getElementById('notesDisplay');
+            
+            if (noteInput.value.trim() === '') return;
+
+            const noteItem = document.createElement('div');
+            noteItem.className = 'note-item';
+            noteItem.textContent = noteInput.value;
+            
+            notesDisplay.appendChild(noteItem);
+            noteInput.value = '';
+        });
+
+        // Autoresize textarea
+        document.getElementById('noteInput').addEventListener('input', (e) => {
+            e.target.style.height = 'auto';
+            e.target.style.height = e.target.scrollHeight + 'px';
+        });
+    </script>
+</body>
+</html>
+
+
+
+							<script>
+                            	
+							</script>
+                        </body>
+                        </html>
+                    
